@@ -254,18 +254,16 @@ transDict = {}
 
 import sys
 from antlr4 import *
-from HelloLexer import HelloLexer
-from HelloParser import HelloParser
-from HelloListener import HelloListener
-from HelloVisitor import HelloVisitor 
+from RegExpGrammarLexer import RegExpGrammarLexer
+from RegExpGrammarParser import RegExpGrammarParser
+from RegExpGrammarVisitor import RegExpGrammarVisitor 
 
-class HelloPrintVisitor(HelloVisitor):
+class RegExpGrammarPrintVisitor(RegExpGrammarVisitor):
     def __init__(self):
         super().__init__()
         self.count = 1
     
-        # Visit a parse tree produced by HelloParser#r0.
-    def visitR0(self, ctx:HelloParser.R0Context):
+    def visitR0(self, ctx:RegExpGrammarParser.R0Context):
         print('In R0')
         if len(ctx.children) == 1:
             return self.visitR1(ctx.r1())
@@ -273,8 +271,7 @@ class HelloPrintVisitor(HelloVisitor):
             return KleeneStar(self.visitR1(ctx.r1()))
 
 
-    # Visit a parse tree produced by HelloParser#r1.
-    def visitR1(self, ctx:HelloParser.R1Context):
+    def visitR1(self, ctx:RegExpGrammarParser.R1Context):
         print('In R1')
         if len(ctx.children) == 1:
             return self.visitR2(ctx.r2())
@@ -282,8 +279,7 @@ class HelloPrintVisitor(HelloVisitor):
             return Union(self.visitR1(ctx.r1()), self.visitR2(ctx.r2()))
 
 
-    # Visit a parse tree produced by HelloParser#r2.
-    def visitR2(self, ctx:HelloParser.R2Context):
+    def visitR2(self, ctx:RegExpGrammarParser.R2Context):
         print('In R2')
         if len(ctx.children) == 1:
             return self.visitR3(ctx.r3())
@@ -291,8 +287,7 @@ class HelloPrintVisitor(HelloVisitor):
             return Concatenation(self.visitR2(ctx.r2()), self.visitR3(ctx.r3()))
 
 
-    # Visit a parse tree produced by HelloParser#r3.
-    def visitR3(self, ctx:HelloParser.R3Context):
+    def visitR3(self, ctx:RegExpGrammarParser.R3Context):
         print('In R3')
         if len(ctx.children) == 1:
             terNode = Terminal(self.count)
@@ -307,12 +302,12 @@ class HelloPrintVisitor(HelloVisitor):
 
 expression = input('Type:')
 istream = InputStream(expression)
-lexer = HelloLexer(istream)
+lexer = RegExpGrammarLexer(istream)
 stream = CommonTokenStream(lexer)
-parser = HelloParser(stream)
+parser = RegExpGrammarParser(stream)
 tree = parser.r0()
 print(tree.toStringTree(recog=parser))
-walker = HelloPrintVisitor()
+walker = RegExpGrammarPrintVisitor()
 expression = walker.visit(tree)
 
 

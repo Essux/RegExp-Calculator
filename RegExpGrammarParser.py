@@ -1,4 +1,4 @@
-# Generated from Hello.g4 by ANTLR 4.7
+# Generated from RegExpGrammar.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -16,7 +16,7 @@ def serializedATN():
         buf.write("\17\5\4\3\2\13\f\5\4\3\2\f\r\7\3\2\2\r\17\3\2\2\2\16\n")
         buf.write("\3\2\2\2\16\13\3\2\2\2\17\3\3\2\2\2\20\21\b\3\1\2\21\22")
         buf.write("\5\6\4\2\22\30\3\2\2\2\23\24\f\4\2\2\24\25\7\4\2\2\25")
-        buf.write("\27\5\6\4\2\26\23\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2")
+        buf.write("\27\5\4\3\5\26\23\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2")
         buf.write("\30\31\3\2\2\2\31\5\3\2\2\2\32\30\3\2\2\2\33\34\b\4\1")
         buf.write("\2\34\35\5\b\5\2\35\"\3\2\2\2\36\37\f\4\2\2\37!\5\b\5")
         buf.write("\2 \36\3\2\2\2!$\3\2\2\2\" \3\2\2\2\"#\3\2\2\2#\7\3\2")
@@ -26,9 +26,9 @@ def serializedATN():
         return buf.getvalue()
 
 
-class HelloParser ( Parser ):
+class RegExpGrammarParser ( Parser ):
 
-    grammarFileName = "Hello.g4"
+    grammarFileName = "RegExpGrammar.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -71,11 +71,11 @@ class HelloParser ( Parser ):
             self.parser = parser
 
         def r1(self):
-            return self.getTypedRuleContext(HelloParser.R1Context,0)
+            return self.getTypedRuleContext(RegExpGrammarParser.R1Context,0)
 
 
         def getRuleIndex(self):
-            return HelloParser.RULE_r0
+            return RegExpGrammarParser.RULE_r0
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterR0" ):
@@ -85,18 +85,12 @@ class HelloParser ( Parser ):
             if hasattr( listener, "exitR0" ):
                 listener.exitR0(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitR0" ):
-                return visitor.visitR0(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def r0(self):
 
-        localctx = HelloParser.R0Context(self, self._ctx, self.state)
+        localctx = RegExpGrammarParser.R0Context(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_r0)
         try:
             self.state = 12
@@ -113,7 +107,7 @@ class HelloParser ( Parser ):
                 self.state = 9
                 self.r1(0)
                 self.state = 10
-                self.match(HelloParser.T__0)
+                self.match(RegExpGrammarParser.T__0)
                 pass
 
 
@@ -132,15 +126,18 @@ class HelloParser ( Parser ):
             self.parser = parser
 
         def r2(self):
-            return self.getTypedRuleContext(HelloParser.R2Context,0)
+            return self.getTypedRuleContext(RegExpGrammarParser.R2Context,0)
 
 
-        def r1(self):
-            return self.getTypedRuleContext(HelloParser.R1Context,0)
+        def r1(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(RegExpGrammarParser.R1Context)
+            else:
+                return self.getTypedRuleContext(RegExpGrammarParser.R1Context,i)
 
 
         def getRuleIndex(self):
-            return HelloParser.RULE_r1
+            return RegExpGrammarParser.RULE_r1
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterR1" ):
@@ -150,18 +147,12 @@ class HelloParser ( Parser ):
             if hasattr( listener, "exitR1" ):
                 listener.exitR1(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitR1" ):
-                return visitor.visitR1(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def r1(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
-        localctx = HelloParser.R1Context(self, self._ctx, _parentState)
+        localctx = RegExpGrammarParser.R1Context(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 2
         self.enterRecursionRule(localctx, 2, self.RULE_r1, _p)
@@ -178,16 +169,16 @@ class HelloParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = HelloParser.R1Context(self, _parentctx, _parentState)
+                    localctx = RegExpGrammarParser.R1Context(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_r1)
                     self.state = 17
                     if not self.precpred(self._ctx, 2):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
                     self.state = 18
-                    self.match(HelloParser.T__1)
+                    self.match(RegExpGrammarParser.T__1)
                     self.state = 19
-                    self.r2(0) 
+                    self.r1(3) 
                 self.state = 24
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,1,self._ctx)
@@ -207,15 +198,15 @@ class HelloParser ( Parser ):
             self.parser = parser
 
         def r3(self):
-            return self.getTypedRuleContext(HelloParser.R3Context,0)
+            return self.getTypedRuleContext(RegExpGrammarParser.R3Context,0)
 
 
         def r2(self):
-            return self.getTypedRuleContext(HelloParser.R2Context,0)
+            return self.getTypedRuleContext(RegExpGrammarParser.R2Context,0)
 
 
         def getRuleIndex(self):
-            return HelloParser.RULE_r2
+            return RegExpGrammarParser.RULE_r2
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterR2" ):
@@ -225,18 +216,12 @@ class HelloParser ( Parser ):
             if hasattr( listener, "exitR2" ):
                 listener.exitR2(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitR2" ):
-                return visitor.visitR2(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
     def r2(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
-        localctx = HelloParser.R2Context(self, self._ctx, _parentState)
+        localctx = RegExpGrammarParser.R2Context(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 4
         self.enterRecursionRule(localctx, 4, self.RULE_r2, _p)
@@ -253,7 +238,7 @@ class HelloParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    localctx = HelloParser.R2Context(self, _parentctx, _parentState)
+                    localctx = RegExpGrammarParser.R2Context(self, _parentctx, _parentState)
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_r2)
                     self.state = 28
                     if not self.precpred(self._ctx, 2):
@@ -280,14 +265,14 @@ class HelloParser ( Parser ):
             self.parser = parser
 
         def r0(self):
-            return self.getTypedRuleContext(HelloParser.R0Context,0)
+            return self.getTypedRuleContext(RegExpGrammarParser.R0Context,0)
 
 
         def ID(self):
-            return self.getToken(HelloParser.ID, 0)
+            return self.getToken(RegExpGrammarParser.ID, 0)
 
         def getRuleIndex(self):
-            return HelloParser.RULE_r3
+            return RegExpGrammarParser.RULE_r3
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterR3" ):
@@ -297,36 +282,30 @@ class HelloParser ( Parser ):
             if hasattr( listener, "exitR3" ):
                 listener.exitR3(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitR3" ):
-                return visitor.visitR3(self)
-            else:
-                return visitor.visitChildren(self)
-
 
 
 
     def r3(self):
 
-        localctx = HelloParser.R3Context(self, self._ctx, self.state)
+        localctx = RegExpGrammarParser.R3Context(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_r3)
         try:
             self.state = 40
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [HelloParser.T__2]:
+            if token in [RegExpGrammarParser.T__2]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 35
-                self.match(HelloParser.T__2)
+                self.match(RegExpGrammarParser.T__2)
                 self.state = 36
                 self.r0()
                 self.state = 37
-                self.match(HelloParser.T__3)
+                self.match(RegExpGrammarParser.T__3)
                 pass
-            elif token in [HelloParser.ID]:
+            elif token in [RegExpGrammarParser.ID]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 39
-                self.match(HelloParser.ID)
+                self.match(RegExpGrammarParser.ID)
                 pass
             else:
                 raise NoViableAltException(self)

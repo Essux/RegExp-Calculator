@@ -1,4 +1,4 @@
-# Generated from Hello.g4 by ANTLR 4.7
+# Generated from RegExpGrammar.g4 by ANTLR 4.7
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
@@ -24,7 +24,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class HelloLexer(Lexer):
+class RegExpGrammarLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -49,7 +49,7 @@ class HelloLexer(Lexer):
 
     ruleNames = [ "T__0", "T__1", "T__2", "T__3", "ID", "WS" ]
 
-    grammarFileName = "Hello.g4"
+    grammarFileName = "RegExpGrammar.g4"
 
     def __init__(self, input=None, output:TextIO = sys.stdout):
         super().__init__(input, output)
