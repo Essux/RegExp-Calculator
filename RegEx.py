@@ -268,7 +268,7 @@ class RegExpGrammarPrintVisitor(RegExpGrammarVisitor):
         if len(ctx.children) == 1:
             return self.visitR1(ctx.r1())
         else:
-            return KleeneStar(self.visitR1(ctx.r1()))
+            return KleeneStar(self.visitR0(ctx.r0()))
 
 
     def visitR1(self, ctx:RegExpGrammarParser.R1Context):
