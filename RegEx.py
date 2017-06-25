@@ -11,6 +11,8 @@ Changelog
     2.2 Added epsilon (ε)
 To-do
     Add option (? or [])
+    Add +
+    Separate classes and methods into different files
 """
 class RegExpType(Enum):
     KLEENE = 1
@@ -19,7 +21,7 @@ class RegExpType(Enum):
     TERMINAL = 4
     EPSILON = 5
 
-class RegExpNode:    
+class RegExpNode:
     charMap = {}
     sigma = set()
 
@@ -57,7 +59,7 @@ class Union(BinaryNode):
 
 class Terminal(LeafNode):
     expType = RegExpType.TERMINAL
-    
+
     def __str__(self):
         return self.charMap[self.lex]
 
@@ -87,7 +89,7 @@ def NullSet(e):
     elif (e.expType == RegExpType.EPSILON): return set('ε')
 
 def IniSet(e):
-    if (e.expType == RegExpType.TERMINAL): 
+    if (e.expType == RegExpType.TERMINAL):
         tempSet = set()
         tempSet.add(str(e.charMap[e.lex])+str(e.lex))
         return tempSet
@@ -104,16 +106,16 @@ def FinSet(e):
     elif (e.expType == RegExpType.UNION): return FinSet(e.leftSon) | FinSet(e.rightSon)
     elif (e.expType == RegExpType.CONCAT): return FinSet(e.rightSon) | SetConcatenation(NullSet(e.rightSon), FinSet(e.leftSon))
     elif (e.expType == RegExpType.KLEENE): return FinSet(e.son)
-    elif (e.expType == RegExpType.EPSILON): return set()    
+    elif (e.expType == RegExpType.EPSILON): return set()
 
 def DigSet(e):
-    if (e.expType == RegExpType.TERMINAL): 
+    if (e.expType == RegExpType.TERMINAL):
         return set()
     elif (e.expType == RegExpType.UNION): return DigSet(e.leftSon) | DigSet(e.rightSon)
     elif (e.expType == RegExpType.CONCAT):
         return DigSet(e.leftSon) | DigSet(e.rightSon) | SetTupleConcatenation(FinSet(e.leftSon), IniSet(e.rightSon))
     elif (e.expType == RegExpType.KLEENE):
-        return DigSet(e.son) | SetTupleConcatenation(FinSet(e.son), IniSet(e.son))        
+        return DigSet(e.son) | SetTupleConcatenation(FinSet(e.son), IniSet(e.son))
     elif (e.expType == RegExpType.EPSILON):
         return set()
 
@@ -132,7 +134,7 @@ def SetTupleConcatenation(a, b):
     for x in a:
         if x == 'ε': continue
         for y in b:
-            if y == 'ε': continue            
+            if y == 'ε': continue
             res.add(Digraph([x, y]))
     return res
 
@@ -202,7 +204,7 @@ def berry_sethi(null, ini, fin, dig, sigma):
     fol = {}
     for connection in dig:
         f = connection[0]
-        t = connection[1] 
+        t = connection[1]
         if f not in fol:
             fol[f] = set()
         fol[f].add(t)
@@ -226,11 +228,11 @@ def berry_sethi(null, ini, fin, dig, sigma):
         for b in sigma:
             nextState = set()
             for bi in curState:
-                if bi[:-1] == b: 
+                if bi[:-1] == b:
                     try:
                         nextState = nextState | fol[bi]
                     except:
-                        pass            
+                        pass
             if nextState and nextState not in visited:
                 q.append(nextState)
                 states.append(nextState)
@@ -256,19 +258,19 @@ import sys
 from antlr4 import *
 from RegExpGrammarLexer import RegExpGrammarLexer
 from RegExpGrammarParser import RegExpGrammarParser
-from RegExpGrammarVisitor import RegExpGrammarVisitor 
+from RegExpGrammarVisitor import RegExpGrammarVisitor
 
 class RegExpGrammarPrintVisitor(RegExpGrammarVisitor):
     def __init__(self):
         super().__init__()
         self.count = 1
-    
+
     def visitR0(self, ctx:RegExpGrammarParser.R0Context):
         print('In R0')
         if len(ctx.children) == 1:
-            return self.visitR1(ctx.r1())
+            return self.visitR3(ctx.r3())
         else:
-            return KleeneStar(self.visitR0(ctx.r0()))
+            return KleeneStar(self.visitR3(ctx.r3()))
 
 
     def visitR1(self, ctx:RegExpGrammarParser.R1Context):
@@ -282,9 +284,9 @@ class RegExpGrammarPrintVisitor(RegExpGrammarVisitor):
     def visitR2(self, ctx:RegExpGrammarParser.R2Context):
         print('In R2')
         if len(ctx.children) == 1:
-            return self.visitR3(ctx.r3())
+            return self.visitR0(ctx.r0())
         else:
-            return Concatenation(self.visitR2(ctx.r2()), self.visitR3(ctx.r3()))
+            return Concatenation(self.visitR2(ctx.r2()), self.visitR0(ctx.r0()))
 
 
     def visitR3(self, ctx:RegExpGrammarParser.R3Context):
@@ -296,7 +298,7 @@ class RegExpGrammarPrintVisitor(RegExpGrammarVisitor):
             terNode.sigma.add(str(ctx.ID()))
             return terNode
         else:
-            return self.visitR0(ctx.r0())
+            return self.visitR1(ctx.r1())
 
 
 
@@ -305,7 +307,7 @@ istream = InputStream(expression)
 lexer = RegExpGrammarLexer(istream)
 stream = CommonTokenStream(lexer)
 parser = RegExpGrammarParser(stream)
-tree = parser.r0()
+tree = parser.r1()
 print(tree.toStringTree(recog=parser))
 walker = RegExpGrammarPrintVisitor()
 expression = walker.visit(tree)

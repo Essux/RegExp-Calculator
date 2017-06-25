@@ -9,11 +9,6 @@ else:
 
 class RegExpGrammarVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by RegExpGrammarParser#r0.
-    def visitR0(self, ctx:RegExpGrammarParser.R0Context):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by RegExpGrammarParser#r1.
     def visitR1(self, ctx:RegExpGrammarParser.R1Context):
         return self.visitChildren(ctx)
@@ -21,6 +16,11 @@ class RegExpGrammarVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by RegExpGrammarParser#r2.
     def visitR2(self, ctx:RegExpGrammarParser.R2Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by RegExpGrammarParser#r0.
+    def visitR0(self, ctx:RegExpGrammarParser.R0Context):
         return self.visitChildren(ctx)
 
 
